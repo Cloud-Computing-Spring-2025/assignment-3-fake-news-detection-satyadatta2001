@@ -1,0 +1,112 @@
+id,title,label_index,prediction
+F001,Aliens Confirmed by Sources,0.0,1.0
+F004,Secret Cure Confirmed by Sources,0.0,1.0
+F021,Secret Cure Confirmed by Sources,0.0,1.0
+F024,Aliens Confirmed by Sources,0.0,1.0
+F025,Flat Earth Confirmed by Sources,0.0,1.0
+F026,Celebrity Scandal Confirmed by Sources,0.0,1.0
+F027,Miracle Drug Confirmed by Sources,0.0,1.0
+F036,Miracle Drug Confirmed by Sources,0.0,1.0
+F045,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F047,Miracle Drug Confirmed by Sources,0.0,1.0
+F052,Mind Control Confirmed by Sources,0.0,1.0
+F056,Celebrity Scandal Confirmed by Sources,0.0,1.0
+F057,Mind Control Confirmed by Sources,0.0,1.0
+F058,Government Cover-Up Confirmed by Sources,0.0,1.0
+F063,Secret Cure Confirmed by Sources,0.0,1.0
+F066,Flat Earth Confirmed by Sources,0.0,1.0
+F071,Celebrity Scandal Confirmed by Sources,0.0,1.0
+F072,Mind Control Confirmed by Sources,0.0,1.0
+F076,Aliens Confirmed by Sources,0.0,1.0
+F084,Miracle Drug Confirmed by Sources,0.0,1.0
+F086,Government Cover-Up Confirmed by Sources,0.0,1.0
+F089,Flat Earth Confirmed by Sources,0.0,1.0
+F090,Mind Control Confirmed by Sources,0.0,1.0
+F091,Flat Earth Confirmed by Sources,0.0,1.0
+F094,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F100,Flat Earth Confirmed by Sources,0.0,1.0
+F102,Government Cover-Up Confirmed by Sources,0.0,1.0
+F104,Aliens Confirmed by Sources,0.0,1.0
+F105,Hoax Confirmed by Sources,0.0,1.0
+F109,Hoax Confirmed by Sources,0.0,1.0
+F113,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F121,Hoax Confirmed by Sources,0.0,1.0
+F122,Mind Control Confirmed by Sources,0.0,1.0
+F126,Aliens Confirmed by Sources,0.0,1.0
+F127,Mind Control Confirmed by Sources,0.0,1.0
+F129,Flat Earth Confirmed by Sources,0.0,1.0
+F132,Mind Control Confirmed by Sources,0.0,1.0
+F152,Government Cover-Up Confirmed by Sources,0.0,1.0
+F155,Flat Earth Confirmed by Sources,0.0,1.0
+F156,Flat Earth Confirmed by Sources,0.0,1.0
+F158,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F160,Mind Control Confirmed by Sources,0.0,1.0
+F161,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F168,Miracle Drug Confirmed by Sources,0.0,1.0
+F169,Government Cover-Up Confirmed by Sources,0.0,1.0
+F178,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F179,Secret Cure Confirmed by Sources,0.0,1.0
+F180,Secret Cure Confirmed by Sources,0.0,1.0
+F189,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F194,Immortal Jellyfish Confirmed by Sources,0.0,1.0
+F196,Government Cover-Up Confirmed by Sources,0.0,1.0
+F197,Secret Cure Confirmed by Sources,0.0,1.0
+F198,Government Cover-Up Confirmed by Sources,0.0,1.0
+F200,Secret Cure Confirmed by Sources,0.0,1.0
+F206,Celebrity Scandal Confirmed by Sources,0.0,1.0
+F208,Aliens Confirmed by Sources,0.0,1.0
+F211,Celebrity Scandal Confirmed by Sources,0.0,1.0
+F212,Miracle Drug Confirmed by Sources,0.0,1.0
+F225,Hoax Confirmed by Sources,0.0,1.0
+F241,Flat Earth Confirmed by Sources,0.0,1.0
+F243,Aliens Confirmed by Sources,0.0,1.0
+R000,New Report on Public Health,1.0,1.0
+R008,New Report on Economic Growth,1.0,1.0
+R009,New Report on Election,1.0,1.0
+R012,New Report on Technology Breakthrough,1.0,1.0
+R023,New Report on Policy,1.0,1.0
+R025,New Report on Election,1.0,1.0
+R027,New Report on Climate Change,1.0,1.0
+R030,New Report on Budget Report,1.0,1.0
+R045,New Report on Technology Breakthrough,1.0,1.0
+R050,New Report on Economic Growth,1.0,1.0
+R054,New Report on Budget Report,1.0,1.0
+R069,New Report on Research,1.0,1.0
+R073,New Report on Economic Growth,1.0,1.0
+R083,New Report on Election,1.0,1.0
+R095,New Report on Policy,1.0,1.0
+R104,New Report on Election,1.0,1.0
+R116,New Report on Education,1.0,1.0
+R124,New Report on Education,1.0,1.0
+R126,New Report on Research,1.0,1.0
+R135,New Report on Budget Report,1.0,1.0
+R136,New Report on Education,1.0,1.0
+R139,New Report on Education,1.0,1.0
+R140,New Report on Climate Change,1.0,1.0
+R142,New Report on Budget Report,1.0,1.0
+R143,New Report on Policy,1.0,1.0
+R150,New Report on Election,1.0,1.0
+R151,New Report on Policy,1.0,1.0
+R152,New Report on Budget Report,1.0,1.0
+R153,New Report on Research,1.0,1.0
+R161,New Report on Technology Breakthrough,1.0,1.0
+R165,New Report on Budget Report,1.0,1.0
+R168,New Report on Election,1.0,1.0
+R170,New Report on Technology Breakthrough,1.0,1.0
+R172,New Report on Economic Growth,1.0,1.0
+R174,New Report on Policy,1.0,1.0
+R175,New Report on Economic Growth,1.0,1.0
+R177,New Report on Policy,1.0,1.0
+R181,New Report on Climate Change,1.0,1.0
+R184,New Report on Budget Report,1.0,1.0
+R187,New Report on Education,1.0,1.0
+R199,New Report on Economic Growth,1.0,1.0
+R208,New Report on Budget Report,1.0,1.0
+R219,New Report on Education,1.0,1.0
+R231,New Report on Policy,1.0,1.0
+R234,New Report on Research,1.0,1.0
+R237,New Report on Election,1.0,0.0
+R242,New Report on Research,1.0,1.0
+R243,New Report on Public Health,1.0,0.0
+R246,New Report on Economic Growth,1.0,1.0
+R247,New Report on Public Health,1.0,1.0
