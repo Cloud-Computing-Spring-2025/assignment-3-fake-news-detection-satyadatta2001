@@ -1,40 +1,41 @@
 from pyspark.sql import SparkSession
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+from pyspark.sql.functions import lit
+import os
 
-# Initialize Spark session
-spark = SparkSession.builder.appName("FakeNewsEvaluation").getOrCreate()
+# Step 1: Start Spark session
+spark = SparkSession.builder.appName("FakeNews_Task5_Evaluation").getOrCreate()
 
-# Load prediction results from task4 output
-predictions = spark.read.option("header", "true").csv("output/task4_output.csv")
+# Step 2: Load predictions
+input_path = "/workspaces/assignment-3-fake-news-detection-satyadatta2001/output/task4_output_lr"
+df = spark.read.option("header", True).csv(input_path)
 
-# Cast columns to correct types if needed
+# Step 3: Cast label and prediction to double
 from pyspark.sql.functions import col
-predictions = predictions.withColumn("label_index", col("label_index").cast("double"))
-predictions = predictions.withColumn("prediction", col("prediction").cast("double"))
+df = df.withColumn("label_index", col("label_index").cast("double"))
+df = df.withColumn("prediction", col("prediction").cast("double"))
 
-# Evaluators
-accuracy_evaluator = MulticlassClassificationEvaluator(
-    labelCol="label_index", predictionCol="prediction", metricName="accuracy"
-)
-f1_evaluator = MulticlassClassificationEvaluator(
-    labelCol="label_index", predictionCol="prediction", metricName="f1"
-)
+# Step 4: Evaluate
+acc_eval = MulticlassClassificationEvaluator(labelCol="label_index", predictionCol="prediction", metricName="accuracy")
+f1_eval = MulticlassClassificationEvaluator(labelCol="label_index", predictionCol="prediction", metricName="f1")
 
-# Calculate metrics
-accuracy = accuracy_evaluator.evaluate(predictions)
-f1_score = f1_evaluator.evaluate(predictions)
+accuracy = acc_eval.evaluate(df)
+f1_score = f1_eval.evaluate(df)
 
-# Show as markdown
-print("\n### Model Evaluation (Task 5)\n")
+# Step 5: Display as Markdown table
+print("\n### 📊 Model Evaluation")
 print("| Metric   | Value |")
-print("|----------|-------|")
+print("|----------|--------|")
 print(f"| Accuracy | {accuracy:.2f} |")
 print(f"| F1 Score | {f1_score:.2f} |")
 
-# Save as CSV
-from pyspark.sql import Row
-metrics = [Row(Metric="Accuracy", Value=round(accuracy, 4)),
-           Row(Metric="F1 Score", Value=round(f1_score, 4))]
+# Step 6: Save to CSV
+result_df = spark.createDataFrame([
+    ("Accuracy", round(accuracy, 4)),
+    ("F1 Score", round(f1_score, 4))
+], ["Metric", "Value"])
 
-metrics_df = spark.createDataFrame(metrics)
-metrics_df.write.option("header", "true").mode("overwrite").csv("output/task5_output.csv")
+output_path = "/workspaces/assignment-3-fake-news-detection-satyadatta2001/output/task5_output"
+result_df.write.mode("overwrite").option("header", True).csv(output_path)
+
+print("\n✅ Evaluation saved to: task5_output")

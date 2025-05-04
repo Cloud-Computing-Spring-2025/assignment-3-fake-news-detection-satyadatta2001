@@ -1,61 +1,44 @@
-from pyspark.ml.feature import HashingTF, IDF, StringIndexer, VectorAssembler
 from pyspark.sql import SparkSession
-from pyspark.ml import Pipeline
-from pyspark.sql.functions import split, concat_ws, udf
-from pyspark.sql.types import StringType
+from pyspark.ml.feature import HashingTF, IDF, StringIndexer
+from pyspark.sql.functions import split, col, size, trim
+import os
 
-# Initialize Spark session
-spark = SparkSession.builder \
-    .appName("FakeNewsClassification") \
-    .getOrCreate()
+# Step 1: Initialize Spark session
+spark = SparkSession.builder.appName("FakeNews_Task3_FeatureExtraction").getOrCreate()
 
-# Load the cleaned CSV file (from Task 2)
-df = spark.read.option("header", "true").csv("output/task2_output.csv", inferSchema=True)
+# Step 2: Load input CSV
+input_csv = "/workspaces/assignment-3-fake-news-detection-satyadatta2001/output/task2_output.csv/part-00000-d24f7806-64ae-40d6-915e-f06a4811bfdd-c000.csv"
+df = spark.read.option("header", True).csv(input_csv)
 
-# Convert the filtered_words_str column (string) into an array of words (tokens)
-df = df.withColumn("filtered_words_array", split(df["filtered_words_str"], " "))
+# Step 3: Split stringified word list into array
+df = df.withColumn("filtered_words", split(df["filtered_words_str"], ", ")).drop("filtered_words_str")
 
-# Task 3: Feature Extraction
+# Step 4: Filter invalid rows
+df = df.filter((size(col("filtered_words")) > 0) & (col("label").isNotNull()) & (trim(col("label")) != ""))
 
-# 1. HashingTF: Convert text into term frequency (TF)
-hashingTF = HashingTF(inputCol="filtered_words_array", outputCol="raw_features", numFeatures=10000)
+# Step 5: TF-IDF pipeline
+hashingTF = HashingTF(inputCol="filtered_words", outputCol="rawFeatures", numFeatures=50000)
+featurizedData = hashingTF.transform(df)
 
-# 2. IDF: Apply Inverse Document Frequency (IDF) to get TF-IDF features
-idf = IDF(inputCol="raw_features", outputCol="features")
+idf = IDF(inputCol="rawFeatures", outputCol="features")
+idfModel = idf.fit(featurizedData)
+rescaledData = idfModel.transform(featurizedData)
 
-# 3. Label Indexing: Convert "FAKE" and "REAL" into 0 and 1
+# Step 6: Index label column
 indexer = StringIndexer(inputCol="label", outputCol="label_index")
+indexed = indexer.fit(rescaledData).transform(rescaledData)
 
-# 4. Assemble all features into a single feature vector (optional if needed for specific models)
-assembler = VectorAssembler(inputCols=["features"], outputCol="final_features")
+# Step 7: Select final columns (✅ includes 'title')
+final_df = indexed.select(
+    "id",
+    "title",  # ✅ included title
+    col("filtered_words").cast("string"),
+    col("features").cast("string"),
+    "label_index"
+)
 
-# Create a pipeline with all stages
-pipeline = Pipeline(stages=[hashingTF, idf, indexer, assembler])
+# Step 8: Save to CSV
+output_dir = "/workspaces/assignment-3-fake-news-detection-satyadatta2001/output/task3_output"
+final_df.write.mode("overwrite").option("header", True).csv(output_dir)
 
-# Fit the pipeline and transform the data
-model = pipeline.fit(df)
-result = model.transform(df)
-
-# Convert the array of filtered words to a string
-result = result.withColumn("filtered_words_str", concat_ws(" ", result["filtered_words_array"]))
-
-# Convert vector features to string (CSV-compatible)
-def vector_to_str(vector):
-    return ",".join(map(str, vector.toArray()))
-
-# Register UDF for converting vector to string
-vector_to_str_udf = udf(vector_to_str, StringType())
-
-# Apply the UDF to convert 'features' column to a string
-result = result.withColumn("features_str", vector_to_str_udf(result["features"]))
-
-# Show the resulting features and labels (for debugging purposes)
-result.select("id", "filtered_words_str", "features_str", "label_index").show(5)
-
-# Save the resulting features and labels to task3_output.csv
-result.select("id", "filtered_words_str", "features_str", "label_index") \
-    .write.option("header", "true") \
-    .csv("output/task3_output.csv")
-
-# Stop the Spark session
-spark.stop()
+print("✅ Task 3 completed. Output saved to task3_output with 'title' included.")

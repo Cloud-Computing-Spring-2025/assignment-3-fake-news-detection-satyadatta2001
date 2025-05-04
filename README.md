@@ -72,8 +72,8 @@ It contains the following columns:
 
 | Metric    | Value |
 |-----------|-------|
-| Accuracy  | 0.43  |
-| F1 Score  | 0.27  |
+| Accuracy  | 0.49  |
+| F1 Score  | 0.32  |
 
 - Output file: `output/task5_output.csv`
 
